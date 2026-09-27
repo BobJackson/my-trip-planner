@@ -1,3 +1,15 @@
 spring:
   application:
     name: my-trip-planner
+  ai:
+    deepseek:
+      api-key: ${DEEPSEEK_API_KEY}
+      chat:
+        model: deepseek-flash
+
+
+logging:
+  level:
+    root: INFO
+    com.wangyousong.practice.mytripplanner: DEBUG
+    org.springframework.ai.chat.client.advisor: DEBUG
