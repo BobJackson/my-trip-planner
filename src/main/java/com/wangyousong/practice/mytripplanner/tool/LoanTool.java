@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 public class LoanTool {
     private final LoanService loanService;
 
+    @SuppressWarnings("unused")
     @Tool(description = "Get current loan application status using loan application id")
     public LoanStatusResponse getLoanStatus(@ToolParam(description = "Loan application id") String applicationId) {
         log.info("Tool selected by model");
