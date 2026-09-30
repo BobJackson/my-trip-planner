@@ -28,7 +28,7 @@ public class LoanAssistantController {
 
     @PostMapping("/chat")
     public LoanChatResponse chat(@Valid @RequestBody LoanRequest request,
-                                @RequestHeader(value = "Conversation-Id", required = false) String conversationId) {
+                                @RequestHeader(value = "X-Conversation-Id", required = false) String conversationId) {
         String convId = StrUtil.isBlank(conversationId)
                 ? UUID.randomUUID().toString()
                 : conversationId;
