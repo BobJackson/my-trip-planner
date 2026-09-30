@@ -1,7 +1,11 @@
 package com.wangyousong.practice.mytripplanner.configuration;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
+import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.memory.ChatMemoryRepository;
+import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,7 +14,15 @@ public class AiConfiguration {
 
 
     @Bean
-    public ChatClient loanChatClient(ChatClient.Builder builder) {
+    public ChatMemory loanChatMemory(ChatMemoryRepository chatMemoryRepository) {
+        return MessageWindowChatMemory.builder()
+                .chatMemoryRepository(chatMemoryRepository)
+                .maxMessages(20)
+                .build();
+    }
+
+    @Bean
+    public ChatClient loanChatClient(ChatClient.Builder builder, ChatMemory loanChatMemory) {
         return builder.defaultSystem("""
                         You are a helpful loan assistant.
                         
@@ -20,7 +32,9 @@ public class AiConfiguration {
                         3. If application is is missing, ask the user for the application id.
                         4. Keep the final response simple and clear.
                         """)
-                .defaultAdvisors(new SimpleLoggerAdvisor())
+                .defaultAdvisors(
+                        new SimpleLoggerAdvisor(),
+                        MessageChatMemoryAdvisor.builder(loanChatMemory).build())
                 .build();
     }
 

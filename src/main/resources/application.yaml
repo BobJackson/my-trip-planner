@@ -1,11 +1,20 @@
 spring:
   application:
     name: my-trip-planner
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ai-chat
+    username: postgres
+    password: postgres
   ai:
     deepseek:
       api-key: ${DEEPSEEK_API_KEY}
       chat:
         model: deepseek-flash
+    chat:
+      memory:
+        repository:
+          jdbc:
+            initialize-schema: always
 
 
 logging:
