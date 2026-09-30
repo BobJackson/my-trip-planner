@@ -24,6 +24,7 @@ ext {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.ai:spring-ai-starter-model-deepseek'
     implementation 'cn.hutool:hutool-all:5.8.40'
     implementation 'io.netty:netty-resolver-dns-native-macos::osx-aarch_64'

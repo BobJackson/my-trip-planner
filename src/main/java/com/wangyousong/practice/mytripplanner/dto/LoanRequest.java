@@ -1,4 +1,6 @@
 package com.wangyousong.practice.mytripplanner.dto;
 
-public record LoanRequest(String message) {
+import jakarta.validation.constraints.NotBlank;
+
+public record LoanRequest(@NotBlank(message = "message must not be blank") String message) {
 }
